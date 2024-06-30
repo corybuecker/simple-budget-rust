@@ -34,10 +34,10 @@ pub async fn page(
         return Err(StatusCode::FORBIDDEN);
     };
 
-    let collection: Collection<Goal> = shared_state
+    let collection = shared_state
         .mongo
         .database("simple_budget")
-        .collection("goals");
+        .collection::<Goal>("goals");
 
     let mut context = Context::new();
     let mut goals: Vec<GoalRecord> = Vec::new();
