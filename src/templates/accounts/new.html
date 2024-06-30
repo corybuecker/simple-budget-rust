@@ -2,13 +2,23 @@
 {% block content %}
 <h1>Accounts</h1>
 
-<form method="post" action="/accounts">
-  {% if errors %}
-  <p>{{errors}}</p>
-  {% endif %}
-  <input name="name" required value="{% if name %}{{ name }}{% endif %}" />
-  <input name="amount" required type="number" value="{% if amount %}{{ amount }}{% endif %}" />
-  <input name="debt" type="checkbox" {% if debt %}{{ "checked" }}{% endif %} value="true" />
-  <input type="submit" value="Save" />
+<form method="post" action="/accounts" class="flex flex-col">
+    {% if errors %}
+    <p>{{errors}}</p>
+    {% endif %}
+    <div>
+    <label for="name">Name</label>
+    <input name="name" required type="text" value="{% if name %}{{ name }}{% endif %}" />
+    </div>
+
+    <div>
+    <label for="amount">Amount</label>
+    <input name="amount" required type="number" value="{% if amount %}{{ amount }}{% endif %}" />
+    </div>
+    <div>
+    <label for="debt">Debt</label>
+    <input name="debt" type="checkbox" {% if debt %}{{ "checked" }}{% endif %} value="true" />
+    </div>
+    <input type="submit">Save</input>
 </form>
 {% endblock content %}

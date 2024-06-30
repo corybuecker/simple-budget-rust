@@ -5,10 +5,9 @@ use axum::{
     response::{Html, IntoResponse, Response},
     Extension,
 };
-use mongodb::{
-    bson::{doc, oid::ObjectId},
-    Collection,
-};
+use log::debug;
+use log::error;
+use mongodb::bson::{doc, oid::ObjectId};
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 use tera::Context;
@@ -31,15 +30,16 @@ pub async fn page(
     shared_state: State<SharedState>,
     user: Extension<UserExtension>,
 ) -> Result<Response, StatusCode> {
-    log::debug!("{:?}", user);
+    debug!("{:?}", user);
+
     let Ok(user_id) = ObjectId::from_str(&user.id) else {
         return Err(StatusCode::FORBIDDEN);
     };
 
-    let collection: Collection<Account> = shared_state
+    let collection = shared_state
         .mongo
         .database("simple_budget")
-        .collection("accounts");
+        .collection::<Account>("accounts");
 
     let mut context = Context::new();
     let mut accounts: Vec<AccountRecord> = Vec::new();
@@ -63,7 +63,7 @@ pub async fn page(
             context.insert("accounts", &accounts);
         }
         Err(e) => {
-            log::error!("{}", e);
+            error!("{}", e);
             context.insert("accounts", &accounts);
         }
     }

@@ -5,9 +5,19 @@
     {% if errors %}
     <p>{{errors}}</p>
     {% endif %}
-    <input name="name" required value="{% if name %}{{ name }}{% endif %}" />
+    <div>
+    <label for="name">Name</label>
+    <input name="name" required type="text" value="{% if name %}{{ name }}{% endif %}" />
+    </div>
+
+    <div>
+    <label for="amount">Amount</label>
     <input name="amount" required type="number" value="{% if amount %}{{ amount }}{% endif %}" />
+    </div>
+    <div>
+    <label for="debt">Debt</label>
     <input name="debt" type="checkbox" {% if debt %}{{ "checked" }}{% endif %} value="true" />
-    <input type="submit">Save</input>
+    </div>
+    <input type="submit" value="Save" />
 </form>
 {% endblock content %}
