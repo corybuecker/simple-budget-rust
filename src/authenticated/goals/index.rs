@@ -6,7 +6,6 @@ use axum::{
     Extension,
 };
 use bson::{doc, oid::ObjectId, serde_helpers::hex_string_as_object_id};
-use mongodb::Collection;
 use serde::{Deserialize, Serialize};
 use tera::Context;
 
