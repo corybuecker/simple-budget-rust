@@ -10,7 +10,7 @@ axum-extra = { version = "^0.9", features = ["cookie-signed", "query"] }
 bson = { version = "^2.11", features = ["serde_with-3"] }
 chrono = "^0.4"
 log = "^0.4"
-mongodb = { version = "^2.8", features = ["bson-chrono-0_4"] }
+mongodb = { version = "^3.0", features = ["bson-chrono-0_4"] }
 openidconnect = { version = "^3.5", features = ["reqwest"] }
 serde = "^1.0"
 tera = { version = "^1.19" }
